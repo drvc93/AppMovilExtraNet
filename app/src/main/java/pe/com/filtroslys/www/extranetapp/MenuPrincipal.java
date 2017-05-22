@@ -1,8 +1,12 @@
 package pe.com.filtroslys.www.extranetapp;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,16 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    int ResultCode = 1 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Menú de opciones");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,13 +87,14 @@ public class MenuPrincipal extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.scanerqr) {
+            //Intent  intent = new Intent(MenuPrincipal.this , LectorQR.class);
+            //startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), ScanQRActivity.class);
+            //  ResultCode = 4545; // Esto puede ser cualquier código.
+            startActivityForResult(intent, ResultCode);
 
-        } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 
@@ -98,4 +106,22 @@ public class MenuPrincipal extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode){
+
+            case  1:
+                if(resultCode==RESULT_OK){
+                    Bundle res = data.getExtras();
+                    String result = res.getString("QRCode");
+                    Intent intent = new Intent(MenuPrincipal.this , MainActivity.class);
+                    startActivity(intent);
+                }
+                break;
+
+
+        }
+
+    }//onActivityResult
 }
