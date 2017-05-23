@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pe.com.filtroslys.www.extranetapp.RegistrarUsuario">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_white">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView5"
+
+            >
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Nro. DNI:"
+                            android:id="@+id/textView8"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:id="@+id/txtDniUs"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:padding="8dp"
+                            android:hint="Escribir DNI"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Nombres"
+                            android:id="@+id/textView5"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/txtNombreUs"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:padding="8dp"
+                            android:hint="Escribir nombre" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Apellidos"
+                            android:id="@+id/textView6"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtApellidos"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:hint="Escribir apellido paterno"
+                            android:inputType="textPersonName"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Fch.Nacimiento"
+                            android:id="@+id/textView7"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtFechaNacimiento"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/edittext_style"
+                            android:clickable="true"
+                            android:ems="10"
+                            android:focusableInTouchMode="false"
+                            android:hint="Fecha Nacimiento"
+                            android:inputType="textPersonName"
+                            android:padding="6dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Correo:"
+                            android:id="@+id/textView15"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtMailUs"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:hint="Escribir correo: ejemplo@gmail.com"
+                            android:inputType="text"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Celular:"
+                            android:id="@+id/textView10"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:id="@+id/txtCelUs"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:padding="8dp"
+                            android:hint="Escribir celular"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="Ruc Emp."
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtCorreoUs"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:hint="Ruc Empresa donde Labora"
+                            android:inputType="textEmailAddress"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="Nomb.Emp."
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtEmpLabora"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:hint="Nombre Empresa donde Labora"
+                            android:inputType="textEmailAddress"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/buttonBarRegUs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            style="@android:style/ButtonBar"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="GUARDAR"
+                android:id="@+id/btnSigRegUs"
+                android:background="@color/colorPrimary"
+                android:textSize="18dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

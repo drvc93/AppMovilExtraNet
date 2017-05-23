@@ -34,8 +34,10 @@ public class MenuPrincipal extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                     //   .setAction("Action", null).show();
+                Intent  intent  = new Intent(MenuPrincipal.this , LectorQRActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -88,13 +90,8 @@ public class MenuPrincipal extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.scanerqr) {
-            //Intent  intent = new Intent(MenuPrincipal.this , LectorQR.class);
-            //startActivity(intent);
-            Intent intent = new Intent(getApplicationContext(), ScanQRActivity.class);
-            //  ResultCode = 4545; // Esto puede ser cualquier código.
-            startActivityForResult(intent, ResultCode);
-
-
+              Intent  intent  = new Intent(MenuPrincipal.this , LectorQRActivity.class);
+              startActivity(intent);
 
         } else if (id == R.id.nav_share) {
 
@@ -102,26 +99,11 @@ public class MenuPrincipal extends AppCompatActivity
 
         }
 
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        switch (requestCode){
-
-            case  1:
-                if(resultCode==RESULT_OK){
-                    Bundle res = data.getExtras();
-                    String result = res.getString("QRCode");
-                    Intent intent = new Intent(MenuPrincipal.this , MainActivity.class);
-                    startActivity(intent);
-                }
-                break;
-
-
-        }
-
-    }//onActivityResult
 }
