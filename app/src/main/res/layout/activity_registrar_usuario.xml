@@ -170,7 +170,7 @@
                             android:background="@drawable/edittext_style"
                             android:ems="10"
                             android:hint="Escribir correo: ejemplo@gmail.com"
-                            android:inputType="text"
+                            android:inputType="textEmailAddress"
                             android:padding="8dp" />
                     </LinearLayout>
 
@@ -221,14 +221,14 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/txtCorreoUs"
+                            android:id="@+id/txtRucEmp"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:background="@drawable/edittext_style"
                             android:ems="10"
                             android:hint="Ruc Empresa donde Labora"
-                            android:inputType="textEmailAddress"
+                            android:inputType="text"
                             android:padding="8dp" />
                     </LinearLayout>
 
@@ -249,14 +249,14 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/txtEmpLabora"
+                            android:id="@+id/txtNomEmp"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:background="@drawable/edittext_style"
                             android:ems="10"
                             android:hint="Nombre Empresa donde Labora"
-                            android:inputType="textEmailAddress"
+                            android:inputType="text"
                             android:padding="8dp" />
                     </LinearLayout>
 
@@ -277,13 +277,13 @@
 
 
             <Button
+                android:id="@+id/btnRegUser"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="GUARDAR"
-                android:id="@+id/btnSigRegUs"
                 android:background="@color/colorPrimary"
-                android:textSize="18dp"
+                android:text="GUARDAR"
                 android:textColor="#ffffff"
+                android:textSize="18dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
