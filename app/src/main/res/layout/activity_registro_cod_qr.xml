@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pe.com.filtroslys.www.extranetapp.RegistrarUsuario">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_white">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView5"
+
+            >
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="Nombre"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtNomQr"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:enabled="false"
+                            android:inputType="text|number|numberSigned"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="Codigo"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtCodQrItem"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:enabled="false"
+                            android:inputType="textPersonName"
+                            android:padding="8dp"
+                            android:selectAllOnFocus="false"
+                            android:singleLine="false" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="DNI Ref."
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtDniRef"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:hint="Escribir Dni Referencia"
+                            android:inputType="text"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Correo:"
+                            android:id="@+id/textView15"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtMailQR"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:hint="Escribir correo: ejemplo@gmail.com"
+                            android:inputType="textEmailAddress"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Celular:"
+                            android:id="@+id/textView10"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#0c0c0c"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txtCelQR"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/edittext_style"
+                            android:ems="10"
+                            android:hint="Escribir celular Ref."
+                            android:inputType="number"
+                            android:padding="8dp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/buttonBarRegUs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            style="@android:style/ButtonBar"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/btnEnviar"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/colorPrimary"
+                android:text="Enviar"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

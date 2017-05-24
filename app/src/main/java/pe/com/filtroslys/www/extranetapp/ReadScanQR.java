@@ -1,5 +1,6 @@
 package pe.com.filtroslys.www.extranetapp;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,7 +16,11 @@ public class ReadScanQR extends AppCompatActivity  implements  ZXingScannerView.
     public void onCreate(Bundle state) {
         super.onCreate(state);
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
-        setContentView(mScannerView);                // Set the scanner view as the content view
+        setContentView(mScannerView);
+        setTitle("Escanear codigo QR.");
+       // ActionBar actionBar = getSupportActionBar();
+        //actionBar.hide();
+        // Set the scanner view as the content view
     }
 
     @Override

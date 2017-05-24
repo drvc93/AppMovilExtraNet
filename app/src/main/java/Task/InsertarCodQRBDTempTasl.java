@@ -12,23 +12,28 @@ import org.ksoap2.transport.HttpTransportSE;
 import Util.Constantes;
 
 /**
- * Created by dvillanueva on 23/05/2017.
+ * Created by dvillanueva on 24/05/2017.
  */
 
-public class TransferirUsuarioTask extends AsyncTask<String,String,String>  {
+public class InsertarCodQRBDTempTasl extends AsyncTask<String,String,String> {
     @Override
     protected String doInBackground(String... strings) {
-        String result ="";
+        String result ="-1";
         // String urlserver = params[2];
         final String NAMESPACE = Constantes.UrlWS;
         final String URL=NAMESPACE+ Constantes.NameSpaceWS;
-        final String METHOD_NAME = "TransferirUsuario";
+        final String METHOD_NAME = "InsertarCodigoQR";
         final String SOAP_ACTION = NAMESPACE+METHOD_NAME;
 
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
-        request.addProperty("tipo", strings[0]);
-        request.addProperty("correlativo", strings[1]);
+        request.addProperty("dniQR", strings[0]);
+        request.addProperty("codigoQR", strings[1]);
+        request.addProperty("dniUF", strings[2]);
+        request.addProperty("telefonoUF", strings[3]);
+        request.addProperty("correoUF", strings[4]);
+
+
 
         SoapSerializationEnvelope envelope =  new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
@@ -51,9 +56,9 @@ public class TransferirUsuarioTask extends AsyncTask<String,String,String>  {
         }
         catch (Exception e)
         {
-            result = e.getMessage();
+            result = "-1";
         }
-        Log.i("Trasnferir usuario  => ", strings[0] + " - "  + result);
+        Log.i("Codigo QR Registrado  => ", result);
         return result;
     }
 }

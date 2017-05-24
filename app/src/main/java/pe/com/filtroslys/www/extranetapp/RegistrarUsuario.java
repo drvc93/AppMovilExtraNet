@@ -66,7 +66,8 @@ public class RegistrarUsuario extends AppCompatActivity {
                 }
                 else {
 
-                    ValidarDatosIngresados();
+                    AlertDialog();
+                    //ValidarDatosIngresados();
                 }
             }
         });
@@ -109,6 +110,10 @@ public class RegistrarUsuario extends AppCompatActivity {
         if (TextUtils.isEmpty(dni)){
 
             msn = "Debe ingresar un DNI valido." ;
+        }
+        else if (dni.length()<8){
+
+            msn = "El DNI debe contener 8 números." ;
         }
         else if (TextUtils.isEmpty(nombre)){
 
@@ -210,6 +215,13 @@ public class RegistrarUsuario extends AppCompatActivity {
             if (resTrans.equals("OK")){
 
                 CreateCustomToast("Se registro correctamente el usuario ,  le enviaremos sus datos de acceso a su correo por favor verifique.", Constantes.icon_succes,Constantes.layout_success);
+                try {
+                    Thread.sleep(3000);
+                    onBackPressed();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             else {
@@ -248,6 +260,31 @@ public class RegistrarUsuario extends AppCompatActivity {
                     }
 
                 }).show();
+    }
+
+
+    public  void  AlertDialog (){
+
+
+        new AlertDialog.Builder(RegistrarUsuario.this)
+                    .setTitle("Aviso")
+                    .setMessage("¿Desea continuar el registro?")
+                    .setIcon(R.drawable.icn_alert24)
+                    .setPositiveButton("SI",
+                            new DialogInterface.OnClickListener() {
+                              //  @TargetApi(11)
+                                public void onClick(DialogInterface dialog, int id) {
+                                    ValidarDatosIngresados();
+                                }
+                            })
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                       // @TargetApi(11)
+                        public void onClick(DialogInterface dialog, int id) {
+                            //showToast("Mike is not awesome for you. :(");
+                            dialog.cancel();
+                        }
+                    }).show();
+
     }
 
     public void CreateCustomToast(String msj, int icon, int backgroundLayout) {

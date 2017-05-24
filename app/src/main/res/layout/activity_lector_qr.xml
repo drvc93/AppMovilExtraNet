@@ -6,37 +6,61 @@
     android:layout_height="match_parent"
     tools:context="pe.com.filtroslys.www.extranetapp.LectorQRActivity">
 
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
 
-        <TextView
-            android:id="@+id/txtCodeQR"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="TextView"
-            android:textAllCaps="true"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="126dp" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnScanQr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_style_silver"
-            android:drawableLeft="@drawable/icn_searchqr_scan"
-            android:text="SCANER QR" />
+            <TextView
+                android:id="@+id/txtCodeQR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Codigo QR"
+                android:textAllCaps="true"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="126dp" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnScanQr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style_silver"
+                android:drawableLeft="@drawable/icn_searchqr_scan"
+                android:text="SCANER QR"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <Button
+                android:id="@+id/btnSiguienteP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_style_silver"
+                android:drawableLeft="@drawable/ic_next_step"
+                android:text="SIGUIENTE"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
