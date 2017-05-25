@@ -272,7 +272,7 @@
             android:layout_alignParentBottom="true"
             style="@android:style/ButtonBar"
             android:gravity="center"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical">
 
 

@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SubMenu;
@@ -21,11 +24,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import Model.CAccesos;
+import Task.HtmlPortalTask;
+import Task.ListaAccesosTask;
 import Util.Constantes;
 
 public class MenuPrincipal extends AppCompatActivity
@@ -33,7 +48,9 @@ public class MenuPrincipal extends AppCompatActivity
 
     int ResultCode = 1 ;
     String  nomb;
+    String DniUserApp;
     SharedPreferences preferences;
+    WebView webPortal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +61,22 @@ public class MenuPrincipal extends AppCompatActivity
         preferences = PreferenceManager.getDefaultSharedPreferences(MenuPrincipal.this);
         String txtNom  =preferences.getString("NOMBRE",null);
         String Correo = preferences.getString("MAIL",null);
+         DniUserApp = preferences.getString("DNI",null);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        webPortal = (WebView) findViewById(R.id.webviewPortal);
+        LoadPortal();
+        //WebView mWebView=(WebView)findViewById(R.id.mWebView);
+
+       /* webPortal.loadUrl("http://www.google.com");
+        webPortal.getSettings().setJavaScriptEnabled(true);
+        webPortal.getSettings().setSaveFormData(true);
+        webPortal.getSettings().setBuiltInZoomControls(true);
+        webPortal.setWebViewClient(new WebViewClient()); */
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                     //   .setAction("Action", null).show();
                 Intent  intent  = new Intent(MenuPrincipal.this , LectorQRActivity.class);
                 startActivity(intent);
             }
@@ -65,9 +91,7 @@ public class MenuPrincipal extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu m = navigationView.getMenu();
-        m.add("dsadas").setIcon(R.drawable.icn_list24);
-        m.add("22");
-
+        LoadNavDrawMenu(m);
         CreateCustomToast("BIENVENIDO "+ txtNom+".", Constantes.icon_succes,Constantes.layout_success);
         View header=navigationView.getHeaderView(0);
 /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
@@ -102,6 +126,8 @@ public class MenuPrincipal extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -116,7 +142,13 @@ public class MenuPrincipal extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.scanerqr) {
+        if (id==11000){
+            Intent  intent  = new Intent(MenuPrincipal.this , LectorQRActivity.class);
+            startActivity(intent);
+
+        }
+       // Toast.makeText( getApplicationContext(), String.valueOf(id),Toast.LENGTH_LONG).show();
+     /*   if (id == R.id.scanerqr) {
               Intent  intent  = new Intent(MenuPrincipal.this , LectorQRActivity.class);
               startActivity(intent);
 
@@ -124,7 +156,7 @@ public class MenuPrincipal extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
 
 
@@ -133,6 +165,93 @@ public class MenuPrincipal extends AppCompatActivity
         return true;
     }
 
+    public   void  LoadNavDrawMenu (Menu menu){
+        ArrayList<CAccesos> listAcc = new ArrayList<>();
+        AsyncTask<String,String,ArrayList<CAccesos>> asyncTaskAccesos;
+        ListaAccesosTask listaAccesosTask = new ListaAccesosTask();
+
+
+        try {
+            asyncTaskAccesos = listaAccesosTask.execute(DniUserApp);
+            listAcc = (ArrayList<CAccesos>) asyncTaskAccesos.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if (listAcc != null  && listAcc.size()>0)
+        {
+
+            ArrayList<CAccesos> ListNivel1 = new ArrayList<>();
+            ArrayList<CAccesos> ListNivel2 = new ArrayList<>();
+
+            for (int i = 0 ; i < listAcc.size();i++){
+                CAccesos item  = listAcc.get(i);
+                if (item.getNivel2()== 0 && item.getNivel3() == 0 && item.getNivel4() == 0 && item.getNivel5()==0){
+
+                    ListNivel1.add(item);
+                }
+                else    if ( item.getNivel3() == 0 && item.getNivel4() == 0 && item.getNivel5()==0){
+
+                    ListNivel2.add(item);
+                }
+
+
+            }
+
+            if (ListNivel1.size()>0){
+
+               /* Menu cM = m.addSubMenu(1,1,1,"Gana Con Lys");
+                cM.add(1,2,2,"Escanear Codigo").setIcon(R.drawable.ic_search_black_24dp);
+                cM.add(1,3,3,"Escanear Codigo").setIcon(R.drawable.ic_search_black_24dp);*/
+
+
+                for (int  j  = 0  ;   j < ListNivel1.size() ; j++){
+                    CAccesos n1 =  ListNivel1.get(j);
+
+                    Menu  m  = menu.addSubMenu(n1.getNivelGN(),n1.getNivelGN(),j,n1.getDescripcion());
+
+                    for (int k  = 0 ;  k < ListNivel2.size()  ; k++){
+
+                        CAccesos n2 = ListNivel2.get(k);
+                        m.add(n1.getNivelGN(),n2.getNivelGN(),k,n2.getDescripcion()).setIcon(SelectIconMenu(n2.getNivelGN()));
+
+                    }
+
+                }
+
+            }
+
+
+        }
+
+
+
+    }
+
+
+
+    public  int SelectIconMenu  (int NivelGN){
+        int icon =  R.drawable.icn_list24;
+        switch (NivelGN){
+
+            case  11000 :
+                icon  = R.drawable.ic_search_black_24dp;
+                break;
+            case 12000:
+                  icon = R.drawable.icn_acumulado24;
+                break;
+            case 13000:
+                icon = R.drawable.icn_premio24;
+                break;
+            case 14000:
+                icon = R.drawable.icn_reglas24;
+                break;
+        }
+
+        return  icon;
+    }
 
     public void CreateCustomToast(String msj, int icon, int backgroundLayout)
     {
@@ -157,6 +276,68 @@ public class MenuPrincipal extends AppCompatActivity
         toast.setView(layout);
         toast.show();
 
+
+    }
+
+    public  void  LoadPortal (){
+        webPortal.loadUrl(Constantes.UrlWS + "/" + Constantes.PortalWebPage);
+        webPortal.getSettings().setJavaScriptEnabled(true);
+        webPortal.getSettings().setSaveFormData(true);
+        webPortal.getSettings().setBuiltInZoomControls(true);
+        webPortal.setWebViewClient(new WebViewClient());
+        //  GuardarHtml();
+
+    }
+
+
+    public void   GuardarHtml (){
+        String resultHtml   = null ;
+        AsyncTask<String,String,String> asyncTaskHtml ;
+        HtmlPortalTask htmlPortalTask = new HtmlPortalTask();
+
+
+
+        try {
+            asyncTaskHtml = htmlPortalTask.execute();
+            resultHtml = (String)  asyncTaskHtml.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        if (resultHtml!=null) {
+
+            File path = new File(Environment.getExternalStorageDirectory() +File.separator+ Constantes.FolderApp);
+            path.mkdirs();
+            File file = new File(path, "portal.html");
+            Log.i("Diirectorio file " , file.toString());
+            FileOutputStream stream = null;
+            try {
+                 stream = new FileOutputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                stream.write(resultHtml.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            //***//*** Load HTML //****//***
+            webPortal.loadUrl("file:///"+Environment.getExternalStorageDirectory().toString()+File.separator+ Constantes.FolderApp+File.separator+"portal.html");
+            webPortal.getSettings().setJavaScriptEnabled(true);
+            webPortal.getSettings().setSaveFormData(true);
+            webPortal.getSettings().setBuiltInZoomControls(true);
+            webPortal.setWebViewClient(new WebViewClient());
+
+        }
 
     }
 

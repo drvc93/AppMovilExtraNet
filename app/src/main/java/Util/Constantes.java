@@ -16,4 +16,6 @@ public class Constantes {
     public static  int layout_success = R.drawable.toas_succes;
     public static  int icon_succes = R.drawable.ic_done24;
     public static int icon_error = R.drawable.icn_error_24b;
+    public  static  String  FolderApp = "AppConfg";
+    public  static  String PortalWebPage = "Portal.aspx";
 }

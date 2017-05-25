@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
@@ -139,7 +142,7 @@ public class RegistroCodQr extends AppCompatActivity {
         }
 
         if (result.equals("-1")){
-            CreateCustomToast("No se pudo regitrar el codigo QR.",Constantes.icon_error,Constantes.layout_error);
+            CreateCustomToast("No se pudo registrar el codigo QR.",Constantes.icon_error,Constantes.layout_error);
         }
         else if (Integer.valueOf(result)>0) {
             String resTrasnf = "";
@@ -174,6 +177,58 @@ public class RegistroCodQr extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_act_scanqr, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.back) {
+            VolverActivity();
+        }
+        return true;
+    }
+
+    public  void  VolverActivity (){
+
+        new AlertDialog.Builder(RegistroCodQr.this)
+                .setTitle("Aviso")
+                .setMessage("¿Esta seguro que desea regresar a la opcion anterior?")
+                .setIcon(R.drawable.icn_alert24)
+                .setPositiveButton("SI",
+                        new DialogInterface.OnClickListener() {
+                            //  @TargetApi(11)
+                            public void onClick(DialogInterface dialog, int id) {
+                               Volver();
+                            }
+                        })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    // @TargetApi(11)
+                    public void onClick(DialogInterface dialog, int id) {
+                        //showToast("Mike is not awesome for you. :(");
+                        dialog.cancel();
+                    }
+                }).show();
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        VolverActivity();
+       // super.onBackPressed();
+    }
+
+    public  void  Volver(){
+        super.onBackPressed();
     }
 
     public void CreateCustomToast(String msj, int icon, int backgroundLayout)
