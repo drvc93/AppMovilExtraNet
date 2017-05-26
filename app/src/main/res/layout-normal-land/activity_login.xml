@@ -112,7 +112,7 @@
             android:background="@color/colorPrimaryDark"
             android:text="INGRESAR"
             android:textColor="@android:color/white"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 

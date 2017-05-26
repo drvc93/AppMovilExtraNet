@@ -248,7 +248,12 @@ public class MenuPrincipal extends AppCompatActivity
             case 14000:
                 icon = R.drawable.icn_reglas24;
                 break;
+            case  15000:
+                icon = R.drawable.icn_catalogo24_2;
+                break;
+
         }
+        Log.i("Id Item Menu" , String.valueOf(NivelGN));
 
         return  icon;
     }
