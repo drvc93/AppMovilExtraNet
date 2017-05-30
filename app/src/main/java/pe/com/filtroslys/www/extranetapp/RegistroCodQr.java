@@ -168,7 +168,7 @@ public class RegistroCodQr extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                onBackPressed();
+                Volver();
 
             }
             else {
