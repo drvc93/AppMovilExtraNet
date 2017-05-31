@@ -34,6 +34,7 @@ public class LectorQRActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent  intent    = new Intent(LectorQRActivity.this , ReadScanQR.class);
+                intent.putExtra("Activ" , "Escaner");
                 startActivity(intent);
             }
         });

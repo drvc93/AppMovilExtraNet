@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +31,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistrarUsuario" />
-        <activity android:name=".RegistroCodQr"></activity>
+        <activity android:name=".RegistroCodQr" />
+        <activity android:name=".BuscarFiltro" />
+        <activity android:name=".VisorCatalago"></activity>
     </application>
 
 </manifest>

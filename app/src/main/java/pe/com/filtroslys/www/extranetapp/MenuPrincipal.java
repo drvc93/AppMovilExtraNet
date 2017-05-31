@@ -147,6 +147,15 @@ public class MenuPrincipal extends AppCompatActivity
             startActivity(intent);
 
         }
+
+        else if (id==15000){
+
+            Intent  intent  = new Intent(MenuPrincipal.this , BuscarFiltro.class);
+            startActivity(intent);
+
+
+
+        }
        // Toast.makeText( getApplicationContext(), String.valueOf(id),Toast.LENGTH_LONG).show();
      /*   if (id == R.id.scanerqr) {
               Intent  intent  = new Intent(MenuPrincipal.this , LectorQRActivity.class);

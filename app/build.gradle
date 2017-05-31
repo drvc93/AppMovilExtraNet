@@ -25,13 +25,13 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('libs/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
 
     compile('com.google.android.gms:play-services:8.1.0') {
         exclude group: 'com.android.support', module: 'support-v4'
     }
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:25.3.1'
     compile 'me.dm7.barcodescanner:zxing:1.8.4'
     testCompile 'junit:junit:4.12'
 }

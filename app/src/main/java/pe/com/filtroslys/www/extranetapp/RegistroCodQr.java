@@ -1,7 +1,10 @@
 package pe.com.filtroslys.www.extranetapp;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -113,14 +116,20 @@ public class RegistroCodQr extends AppCompatActivity {
             sMsj= "Ingrese un  número de celalar valido";
         }
 
+        else if (isOnline()==false){
+
+            sMsj = "Debe estar conectado a una red wi-fi o red de datos para realizar esta operación.verifique por favor.";
+        }
+
         if (sMsj.equals("OK")){
 
             InsertarCodigoQRTemp(dniref,correoref,celRef);
         }
         else {
 
-            CreateCustomToast("No se puedo compleatr el registro intentelo de nuevo", Constantes.icon_warning,Constantes.layot_warning);
+            CreateCustomToast(sMsj, Constantes.icon_warning,Constantes.layot_warning);
         }
+
 
 
     }
@@ -218,6 +227,13 @@ public class RegistroCodQr extends AppCompatActivity {
                 }).show();
 
 
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     @Override

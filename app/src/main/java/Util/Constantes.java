@@ -8,7 +8,8 @@ import pe.com.filtroslys.www.extranetapp.R;
 
 public class Constantes {
 
-    public static  String UrlWS =  "http://190.187.181.57:8030/" ;//"http://100.100.100.237:8030/";
+   public static  String UrlWS =  "http://190.187.181.57:8030/" ; // Prod
+  //  public static  String UrlWS =  "http://100.100.100.237:8030/"; // Test
     public  static  String NameSpaceWS = "WSExtraNet.asmx";
     public static  int layout_error = R.drawable.toast_error;
     public static  int icon_warning = R.drawable.icn_error_24;
@@ -18,4 +19,5 @@ public class Constantes {
     public static int icon_error = R.drawable.icn_error_24b;
     public  static  String  FolderApp = "AppConfg";
     public  static  String PortalWebPage = "Portal.aspx";
+    public  static  String CatalogoWebPage = "Catalogo.aspx";
 }
