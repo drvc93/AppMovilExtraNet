@@ -252,7 +252,7 @@
                             android:id="@+id/txtNomEmp"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="60sp"
+                            android:layout_marginBottom="50sp"
                             android:layout_marginLeft="10dp"
                             android:background="@drawable/edittext_style"
                             android:ems="10"
@@ -268,12 +268,12 @@
 
         <LinearLayout
             android:id="@+id/buttonBarRegUs"
-            style="@android:style/ButtonBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"
+            style="@android:style/ButtonBar"
             android:gravity="center"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical">
 
 

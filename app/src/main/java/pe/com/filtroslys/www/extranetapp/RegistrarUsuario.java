@@ -3,7 +3,9 @@ package pe.com.filtroslys.www.extranetapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.SyncStateContract;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     EditText txtNom , txtApellidos, txtCorreo, txtCelular, txtRucEmp , txtNomEmp;
     String FechaFinal;
     Button btnRegUser ;
+    int currentapiVersion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,17 @@ public class RegistrarUsuario extends AppCompatActivity {
         txtNomEmp = (EditText)findViewById(R.id.txtNomEmp) ;
         btnRegUser = (Button)findViewById(R.id.btnRegUser);
         setTitle("Registrar Usuario");
+
+        currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= Build.VERSION_CODES.JELLY_BEAN_MR2){
+            ActionBar actionBar = getSupportActionBar();
+            actionBar = getSupportActionBar();
+            actionBar.setDisplayUseLogoEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.hide();
+
+        }
 
         txtFecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +158,10 @@ public class RegistrarUsuario extends AppCompatActivity {
             msn = "Debe ingresar un nombre de empresa  valido.";
         }
 
+        else if (empruc.length()<11){
+            msn = "El ruc de la empresa debe tener al menos 11 caracteres";
+        }
+
         else if (TextUtils.isEmpty(fechanacimiento)){
 
             msn = "Debe ingresar una fecha de nacimiento  valida.";
@@ -225,7 +243,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             }
 
             else {
-                CreateCustomToast("Hubo un error al momentro de registrar , por favor intentelo de nuevo",Constantes.icon_error,Constantes.layout_error);
+                CreateCustomToast("Hubo un error al momentro de registrar : " + resTrans,Constantes.icon_error,Constantes.layout_error);
             }
 
         }

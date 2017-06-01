@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +38,7 @@ public class RegistroCodQr extends AppCompatActivity {
     EditText txtNom , txtCodigo , txtDniRef, txtMailRef , txtCelularRef;
     Button btnEnviar;
     String DniUserApp ;
-
+    int currentapiVersion ;
     SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,16 @@ public class RegistroCodQr extends AppCompatActivity {
         txtMailRef = (EditText) findViewById(R.id.txtMailQR);
         txtCelularRef = (EditText)findViewById(R.id.txtCelQR);
         setTitle("Registro Codigo QR.");
+        currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= Build.VERSION_CODES.JELLY_BEAN_MR2){
+            ActionBar actionBar = getSupportActionBar();
+            actionBar = getSupportActionBar();
+            actionBar.setDisplayUseLogoEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.hide();
 
+        }
         preferences = PreferenceManager.getDefaultSharedPreferences(RegistroCodQr.this);
         String nombre  =preferences.getString("NOMBRE",null);
         String apellido =  preferences.getString("APELLIDO",null);

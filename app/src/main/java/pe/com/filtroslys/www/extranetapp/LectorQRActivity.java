@@ -53,7 +53,7 @@ public class LectorQRActivity extends AppCompatActivity {
 
 
         String cod = txtresultCode.getText().toString();
-       // String cod = "LF1A-3";
+       //  cod = "LF1A-3";
 
         if (cod.equals("Codigo QR")|| TextUtils.isEmpty(cod) ==true){
 
