@@ -39,8 +39,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_style_silver"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="--" />
+                android:hint="Ingrese un codigo de filtro"
+                android:inputType="textPersonName" />
 
             <LinearLayout
                 android:layout_width="match_parent"

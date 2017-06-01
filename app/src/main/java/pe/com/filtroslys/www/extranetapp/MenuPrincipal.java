@@ -1,15 +1,23 @@
 package pe.com.filtroslys.www.extranetapp;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,11 +59,13 @@ public class MenuPrincipal extends AppCompatActivity
     String DniUserApp;
     SharedPreferences preferences;
     WebView webPortal;
+    ImageView  imgProfile ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         setTitle("Menú de opciones");
         preferences = PreferenceManager.getDefaultSharedPreferences(MenuPrincipal.this);
@@ -97,8 +107,17 @@ public class MenuPrincipal extends AppCompatActivity
 /*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
         TextView name = (TextView)header.findViewById(R.id.txtUserNav);
         TextView  email = (TextView)header.findViewById(R.id.txtMailNav);
+        imgProfile=  (ImageView) header.findViewById(R.id.imgProfile);
         name.setText(txtNom);
         email.setText(Correo);
+        ObtenerPermisios();
+
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // ObtenerImagenPerfil();
+            }
+        });
 
     }
 
@@ -355,4 +374,77 @@ public class MenuPrincipal extends AppCompatActivity
 
     }
 
+    public  void    ObtenerPermisios ()
+    {
+
+        if (ContextCompat.checkSelfPermission(MenuPrincipal.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_DENIED);
+        {
+
+            ActivityCompat.requestPermissions(MenuPrincipal.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+
+        }
+    }
+
+    private void ObtenerImagenPerfil() {
+
+
+         /*
+     * WebView is created programatically here.
+     *
+     * @Here are the list of items to be shown in the list
+     */
+        final CharSequence[] items = { "Galeria", "Tomar Foto" };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MenuPrincipal.this);
+        builder.setTitle("Seleccionar o tomar foto");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+
+                if  (item == 0) {
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
+
+                }
+
+                if (item==1){
+
+                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(takePicture, 0);//zero can be replaced with any act
+                }
+                // will toast your selection
+               // showToast("Name: " + items[item]);
+
+
+            }
+        }).show();
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("Uri foto",data.getDataString());
+        switch(requestCode) {
+
+            case 0:
+                if(resultCode == RESULT_OK){
+                    Uri selectedImage = data.getData();
+                    imgProfile.setImageURI(selectedImage);
+                }
+
+                break;
+            case 1:
+                if(resultCode == RESULT_OK){
+                    Uri selectedImage = data.getData();
+                    imgProfile.setImageURI(selectedImage);
+                }
+                break;
+
+
+        }
+
+    }
 }
