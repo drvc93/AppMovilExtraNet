@@ -167,10 +167,10 @@ public class RegistrarUsuario extends AppCompatActivity {
             msn = "Debe ingresar una fecha de nacimiento  valida.";
         }
 
-        else if (CompararFechas(fechanacimiento).equals("ERROR")){
+    /*    else if (CompararFechas(fechanacimiento).equals("ERROR")){
 
             msn = "La fecha de nacimiento  es mayor a la fecha actual.";
-        }
+        }*/
 
         if (msn.equals("OK")){
 

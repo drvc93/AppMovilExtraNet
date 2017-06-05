@@ -36,6 +36,7 @@ import java.util.concurrent.ExecutionException;
 
 import Model.CUsuario;
 import Task.LoginUserTask;
+import Task.ValidarLoginTask;
 import Util.Constantes;
 
 public class Login extends AppCompatActivity {
@@ -71,7 +72,15 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               AutenticarUsuarioLogin(txtUser.getText().toString(),txtPass.getText().toString());
+                String resVal =  ValidarLog(txtUser.getText().toString(),txtPass.getText().toString());
+                if (resVal.equals("OK")) {
+
+                    AutenticarUsuarioLogin(txtUser.getText().toString(), txtPass.getText().toString());
+                }
+                else {
+
+                    CreateCustomToast(resVal ,  Constantes.icon_warning,Constantes.layot_warning);
+                }
             }
         });
 
@@ -107,6 +116,24 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+
+
+    public  String  ValidarLog (String user , String clave){
+        String resulvalidar ="";
+        AsyncTask<String,String,String> asyncTaskValidarLogin  ;
+        ValidarLoginTask  validarLoginTask =  new ValidarLoginTask();
+        try {
+            asyncTaskValidarLogin = validarLoginTask.execute(user,clave);
+            resulvalidar = asyncTaskValidarLogin.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return  resulvalidar;
+    }
+
 
     public  void  AutenticarUsuarioLogin (String user , String clave){
         ArrayList<CUsuario>  listUs = null;
