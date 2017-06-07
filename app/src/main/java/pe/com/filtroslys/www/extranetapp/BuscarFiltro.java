@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,7 @@ public class BuscarFiltro extends AppCompatActivity {
         btnScan = (Button)findViewById(R.id.btnEscanFiltro);
         btnVerCatalogo = (Button)findViewById(R.id.btnVerCatalogo);
         txtFiltroCat = (EditText) findViewById(R.id.txtFiltroCatalago);
+        txtFiltroCat.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -53,8 +53,6 @@ public class InsertUserBDTempTask  extends AsyncTask<String , String ,String> {
             String res = resultado_xml.toString();
 
             result=res;
-
-
         }
         catch (Exception e)
         {

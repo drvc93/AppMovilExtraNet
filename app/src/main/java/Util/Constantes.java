@@ -20,4 +20,5 @@ public class Constantes {
     public  static  String  FolderApp = "AppConfg";
     public  static  String PortalWebPage = "Portal.aspx";
     public  static  String CatalogoWebPage = "Catalogo.aspx";
+    public  static  String ReportePuntosWebpage = "ReportePuntos.aspx";
 }

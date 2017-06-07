@@ -167,6 +167,15 @@ public class MenuPrincipal extends AppCompatActivity
 
         }
 
+        else if (id==12000){
+
+            Intent  intent  = new Intent(MenuPrincipal.this , VisorPuntosAcumulados.class);
+            startActivity(intent);
+
+
+
+        }
+
         else if (id==15000){
 
             Intent  intent  = new Intent(MenuPrincipal.this , BuscarFiltro.class);

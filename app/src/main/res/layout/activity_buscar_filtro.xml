@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_style_silver"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textCapCharacters|textPersonName"
                 android:text="--" />
 
             <Button
