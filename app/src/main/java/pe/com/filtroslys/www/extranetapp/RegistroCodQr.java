@@ -168,6 +168,7 @@ public class RegistroCodQr extends AppCompatActivity {
             String resTrasnf = "";
             AsyncTask<String,String,String> asyncTaskTransQR ;
             TransferirUsuarioTask transferirUsuarioTask = new TransferirUsuarioTask();
+            transferirUsuarioTask.context = RegistroCodQr.this;
 
 
             try {

@@ -218,6 +218,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             String resTrans  = "";
             AsyncTask<String,String,String> AsyncTrans   ;
             TransferirUsuarioTask   transferirUsuarioTask = new TransferirUsuarioTask();
+            transferirUsuarioTask.context = RegistrarUsuario.this;
 
 
 

@@ -1,5 +1,7 @@
 package Task;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -16,8 +18,36 @@ import Util.Constantes;
  */
 
 public class TransferirUsuarioTask extends AsyncTask<String,String,String>  {
+    public Context context ;
+    ProgressDialog pd;
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setIndeterminate(false);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setCancelable(false);
+        pd.setMessage("Estamos verficando la informacion");
+        pd.show();
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        if (pd != null)
+        {
+            pd.dismiss();
+        }
+    }
+
     @Override
     protected String doInBackground(String... strings) {
+        publishProgress("Espere...");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String result ="";
         // String urlserver = params[2];
         final String NAMESPACE = Constantes.UrlWS;
@@ -54,6 +84,9 @@ public class TransferirUsuarioTask extends AsyncTask<String,String,String>  {
             result = e.getMessage();
         }
         Log.i("Trasnferir usuario  => ", strings[0] + " - "  + result);
+
+
+
         return result;
     }
 }
