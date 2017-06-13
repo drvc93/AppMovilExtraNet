@@ -1,7 +1,14 @@
 package pe.com.filtroslys.www.extranetapp;
 
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.SyncStateContract;
@@ -80,7 +87,7 @@ public class RegistrarUsuario extends AppCompatActivity {
                 }
                 else {
 
-                    AlertDialog();
+                   AlertDialog();
                     //ValidarDatosIngresados();
                 }
             }
@@ -234,6 +241,7 @@ public class RegistrarUsuario extends AppCompatActivity {
             if (resTrans.equals("OK")){
 
                 CreateCustomToast("Se registro correctamente el usuario ,  le enviaremos sus datos de acceso a su correo por favor verifique.", Constantes.icon_succes,Constantes.layout_success);
+                Notif();
                 try {
                     Thread.sleep(3000);
                     onBackPressed();
@@ -347,6 +355,34 @@ public class RegistrarUsuario extends AppCompatActivity {
         }
 
         return  res ;
+    }
+
+
+    public  void  Notif (){
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        long[] pattern = {500,500,500,500,500,500,500,500,500};
+        // NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        Notification n  = new Notification.Builder(this)
+                .setContentTitle("Datos de acceso.")
+                .setContentText("Revise sus datos de acceso en su correo.")
+                .setSmallIcon(android.R.drawable.sym_action_email)
+                .setContentIntent(pIntent)
+                .setAutoCancel(true)
+                .setSound(alarmSound)
+                .setVibrate(pattern)
+
+               // .addAction(android.R.drawable.sym_action_email, "Call", pIntent)
+               // .addAction(R.drawable.icn_success, "More", pIntent)
+                .addAction(android.R.drawable.sym_action_email, "Revisar correo.", pIntent).build();
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0, n);
+
     }
 
 }
