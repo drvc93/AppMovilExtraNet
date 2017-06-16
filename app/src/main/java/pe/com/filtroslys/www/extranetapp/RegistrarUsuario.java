@@ -29,6 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.florent37.viewtooltip.ViewTooltip;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
@@ -127,57 +129,64 @@ public class RegistrarUsuario extends AppCompatActivity {
         empruc = txtRucEmp.getText().toString();
         empnom  = txtNomEmp.getText().toString();
         fechanacimiento  = txtFecha.getText().toString();
+        EditText ed  = null ;
 
         if (TextUtils.isEmpty(dni)){
 
             msn = "Debe ingresar un DNI valido." ;
+            ed = txtDni;
         }
         else if (dni.length()<8){
 
             msn = "El DNI debe contener 8 números." ;
+            ed = txtDni;
         }
         else if (TextUtils.isEmpty(nombre)){
 
             msn = "Debe ingresar un nombre valido." ;
+            ed = txtNom;
         }
         else if (TextUtils.isEmpty(apellido)){
 
             msn = "Debe ingresar un apellido valido.";
+            ed = txtApellidos;
         }
 
         else if (TextUtils.isEmpty(correo)){
 
             msn = "Debe ingresar un correo valido.";
+            ed = txtCorreo;
         }
 
         else if (TextUtils.isEmpty(telefono)){
 
             msn = "Debe ingresar un telefono valido.";
+            ed  =   txtCelular;
         }
 
         else if (TextUtils.isEmpty(empruc)){
 
             msn = "Debe ingresar un RUC de empresa  valido.";
+            ed = txtRucEmp;
         }
 
         else if (TextUtils.isEmpty(empnom)){
 
             msn = "Debe ingresar un nombre de empresa  valido.";
+            ed = txtNomEmp;
         }
 
         else if (empruc.length()<11){
             msn = "El ruc de la empresa debe tener al menos 11 caracteres";
+            ed = txtRucEmp;
         }
 
         else if (TextUtils.isEmpty(fechanacimiento)){
 
             msn = "Debe ingresar una fecha de nacimiento  valida.";
+            ed = txtFecha;
         }
 
-    /*    else if (CompararFechas(fechanacimiento).equals("ERROR")){
-
-            msn = "La fecha de nacimiento  es mayor a la fecha actual.";
-        }*/
 
         if (msn.equals("OK")){
 
@@ -186,6 +195,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         else {
 
             CreateCustomToast(msn,Constantes.icon_warning,Constantes.layot_warning);
+          //  SetToolTip(ed);
         }
 
     }
@@ -289,7 +299,6 @@ public class RegistrarUsuario extends AppCompatActivity {
                 }).show();
     }
 
-
     public  void  AlertDialog (){
 
 
@@ -357,6 +366,15 @@ public class RegistrarUsuario extends AppCompatActivity {
         return  res ;
     }
 
+
+    public  void  SetToolTip (EditText editText) {
+        ViewTooltip
+                .on(editText)
+                .autoHide(true, 1500)
+                .position(ViewTooltip.Position.RIGHT)
+                .text("Ingrese el dato nuevamente")
+                .show();
+    }
 
     public  void  Notif (){
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

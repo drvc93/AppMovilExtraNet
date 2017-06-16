@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "408325175813",
+    "firebase_url": "https://extranetapp.firebaseio.com",
+    "project_id": "extranetapp",
+    "storage_bucket": "extranetapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408325175813:android:a86bc77114e28fd5",
+        "android_client_info": {
+          "package_name": "pe.com.filtroslys.www.extranetapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408325175813-84msfivste80vrs3pcfur7llg6hhhs1a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.com.filtroslys.www.extranetapp",
+            "certificate_hash": "61dcbd465c11f5a20713841a5f4b92116ef1f255"
+          }
+        },
+        {
+          "client_id": "408325175813-jpllbq2fld73gqonj6noptvu7v9gj1d7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVaEJ_B__bXRqZHRTa5TktJl5TpLLdMYA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408325175813-jpllbq2fld73gqonj6noptvu7v9gj1d7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
