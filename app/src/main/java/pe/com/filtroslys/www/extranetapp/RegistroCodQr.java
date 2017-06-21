@@ -1,5 +1,6 @@
 package pe.com.filtroslys.www.extranetapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -166,21 +167,31 @@ public class RegistroCodQr extends AppCompatActivity {
         }
         else if (Integer.valueOf(result)>0) {
             String resTrasnf = "";
-            AsyncTask<String,String,String> asyncTaskTransQR ;
+            AsyncTask<Void,String,Void> asyncTaskTransQR ;
             TransferirUsuarioTask transferirUsuarioTask = new TransferirUsuarioTask();
+            ProgressDialog progressDialog= new ProgressDialog(RegistroCodQr.this);
+            progressDialog.setTitle("Registrando...");
+            progressDialog.setMessage("Transfiriendo datos espere por favor...");
+            progressDialog.setIcon(R.drawable.sinc_24);
+
             transferirUsuarioTask.context = RegistroCodQr.this;
+            transferirUsuarioTask.tipo = "EQ";
+            transferirUsuarioTask.correlativo  = result;
+            transferirUsuarioTask.pd = progressDialog ;
+            transferirUsuarioTask.ToastSuccess = CreateAndGetToast("Se  registro correctamente", Constantes.icon_succes,Constantes.layout_success);
+            transferirUsuarioTask.ActiviRegCodQr = this;
+
+
 
 
             try {
-                asyncTaskTransQR = transferirUsuarioTask.execute("EQ",result);
-                resTrasnf = (String) asyncTaskTransQR.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+                asyncTaskTransQR = transferirUsuarioTask.execute();
+                //resTrasnf = preferences.getString("msjTrans",null);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            if (resTrasnf.equals("OK")){
+            /*if (resTrasnf.equals("OK")){
 
                 CreateCustomToast("Se regitro correctamente el codigo QR, en  unos minutos se le estara enviando un correo.",Constantes.icon_succes,Constantes.layout_success);
                 try {
@@ -195,7 +206,7 @@ public class RegistroCodQr extends AppCompatActivity {
             else {
 
                 CreateCustomToast(resTrasnf,Constantes.icon_error, Constantes.layot_warning);
-            }
+            }*/
         }
 
     }
@@ -284,4 +295,28 @@ public class RegistroCodQr extends AppCompatActivity {
 
 
     }
+
+    public  Toast CreateAndGetToast (String msj, int icon, int backgroundLayout){
+        LayoutInflater infator = getLayoutInflater();
+        View layout = infator.inflate(R.layout.toast_alarm_success, (ViewGroup) findViewById(R.id.toastlayout));
+        TextView toastText = (TextView) layout.findViewById(R.id.txtDisplayToast);
+        ImageView imgIcon = (ImageView) layout.findViewById(R.id.imgToastSucc);
+        LinearLayout parentLayout = (LinearLayout) layout.findViewById(R.id.toastlayout);
+        imgIcon.setImageResource(icon);
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            parentLayout.setBackgroundDrawable(getResources().getDrawable(backgroundLayout));
+        } else {
+            parentLayout.setBackground(getResources().getDrawable(backgroundLayout));
+        }
+
+
+        toastText.setText(msj);
+        Toast toast = new Toast(RegistroCodQr.this);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        return toast;
+        // toast.show();
+    }
+
 }

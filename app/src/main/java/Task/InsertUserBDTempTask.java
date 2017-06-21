@@ -1,5 +1,7 @@
 package Task;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -16,6 +18,24 @@ import Util.Constantes;
  */
 
 public class InsertUserBDTempTask  extends AsyncTask<String , String ,String> {
+    public Context context ;
+     public ProgressDialog pd;
+
+
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
+    }
+
     @Override
     protected String doInBackground(String... strings) {
         String result ="-1";
@@ -59,6 +79,11 @@ public class InsertUserBDTempTask  extends AsyncTask<String , String ,String> {
             result = "";
         }
         Log.i("Usuario Registrado  => ", result);
+
+
+
         return result;
     }
+
+
 }

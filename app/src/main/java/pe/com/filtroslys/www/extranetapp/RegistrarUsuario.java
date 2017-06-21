@@ -4,18 +4,22 @@ package pe.com.filtroslys.www.extranetapp;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +51,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     String FechaFinal;
     Button btnRegUser ;
     int currentapiVersion;
+    SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +65,10 @@ public class RegistrarUsuario extends AppCompatActivity {
         txtRucEmp = (EditText) findViewById(R.id.txtRucEmp);
         txtNomEmp = (EditText)findViewById(R.id.txtNomEmp) ;
         btnRegUser = (Button)findViewById(R.id.btnRegUser);
+        txtNom.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
+        txtApellidos.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
+        txtNomEmp.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
+        preferences = PreferenceManager.getDefaultSharedPreferences(RegistrarUsuario.this);
         setTitle("Registrar Usuario");
 
         currentapiVersion = android.os.Build.VERSION.SDK_INT;
@@ -134,12 +143,12 @@ public class RegistrarUsuario extends AppCompatActivity {
         if (TextUtils.isEmpty(dni)){
 
             msn = "Debe ingresar un DNI valido." ;
-            ed = txtDni;
+           // ed = txtDni;
         }
         else if (dni.length()<8){
 
             msn = "El DNI debe contener 8 números." ;
-            ed = txtDni;
+           // ed = txtDni;
         }
         else if (TextUtils.isEmpty(nombre)){
 
@@ -206,6 +215,14 @@ public class RegistrarUsuario extends AppCompatActivity {
         String resul = "" ;
         AsyncTask<String,String,String> asyncTask ;
         InsertUserBDTempTask insertUserBDTempTask =  new InsertUserBDTempTask();
+        ProgressDialog progressDialog= new ProgressDialog(RegistrarUsuario.this);
+        progressDialog.setTitle("Registrando...");
+        progressDialog.setMessage("Transfiriendo datos espere por favor...");
+        progressDialog.setIcon(R.drawable.sinc_24);
+
+        insertUserBDTempTask.context = RegistrarUsuario.this;
+        insertUserBDTempTask.pd = progressDialog;
+       //  insertUserBDTempTask.ShowDialog();
 
         Log.i("dni",dni);
         Log.i("nombre",nombre);
@@ -233,37 +250,38 @@ public class RegistrarUsuario extends AppCompatActivity {
         }
         else if (Integer.valueOf(resul)>0){
             String resTrans  = "";
-            AsyncTask<String,String,String> AsyncTrans   ;
+            //MyApplication appc   = (MyApplication)this.getApplication();
+            AsyncTask<Void,String,Void> AsyncTrans   ;
             TransferirUsuarioTask   transferirUsuarioTask = new TransferirUsuarioTask();
             transferirUsuarioTask.context = RegistrarUsuario.this;
 
+            transferirUsuarioTask.correlativo=resul;
+            transferirUsuarioTask.tipo = "RU";
+           // transferirUsuarioTask.preferences   = preferences;
 
+            transferirUsuarioTask.pd =  progressDialog;
+          //  transferirUsuarioTask.myapp = appc  ;
+            transferirUsuarioTask.ToastSuccess = CreateAndGetToast("Se  registro correctamente", Constantes.icon_succes,Constantes.layout_success);
+            transferirUsuarioTask.ActiviRegUser = this;
 
             try {
-                AsyncTrans = transferirUsuarioTask.execute("RU",resul);
-                resTrans = (String) AsyncTrans.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
+                AsyncTrans = transferirUsuarioTask.execute();
+
+                //Log.i("MYapp Var" , resTrans);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            if (resTrans.equals("OK")){
+           /* if (resTrans.equals("OK")){
 
                 CreateCustomToast("Se registro correctamente el usuario ,  le enviaremos sus datos de acceso a su correo por favor verifique.", Constantes.icon_succes,Constantes.layout_success);
                 Notif();
-                try {
-                    Thread.sleep(3000);
-                    onBackPressed();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
             }
 
             else {
                 CreateCustomToast("Hubo un error al momentro de registrar : " + resTrans,Constantes.icon_error,Constantes.layout_error);
-            }
+            }*/
 
         }
 
@@ -310,6 +328,8 @@ public class RegistrarUsuario extends AppCompatActivity {
                             new DialogInterface.OnClickListener() {
                               //  @TargetApi(11)
                                 public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                   // ShowProgressDialog();
                                     ValidarDatosIngresados();
                                 }
                             })
@@ -347,6 +367,30 @@ public class RegistrarUsuario extends AppCompatActivity {
 
 
     }
+
+     public  Toast CreateAndGetToast (String msj, int icon, int backgroundLayout){
+         LayoutInflater infator = getLayoutInflater();
+         View layout = infator.inflate(R.layout.toast_alarm_success, (ViewGroup) findViewById(R.id.toastlayout));
+         TextView toastText = (TextView) layout.findViewById(R.id.txtDisplayToast);
+         ImageView imgIcon = (ImageView) layout.findViewById(R.id.imgToastSucc);
+         LinearLayout parentLayout = (LinearLayout) layout.findViewById(R.id.toastlayout);
+         imgIcon.setImageResource(icon);
+         final int sdk = android.os.Build.VERSION.SDK_INT;
+         if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+             parentLayout.setBackgroundDrawable(getResources().getDrawable(backgroundLayout));
+         } else {
+             parentLayout.setBackground(getResources().getDrawable(backgroundLayout));
+         }
+
+
+         toastText.setText(msj);
+         Toast toast = new Toast(RegistrarUsuario.this);
+         toast.setDuration(Toast.LENGTH_LONG);
+         toast.setView(layout);
+         return toast;
+        // toast.show();
+     }
+
 
     public  String CompararFechas (String fechaNacimiento) {
         String res = "" ;
@@ -400,6 +444,24 @@ public class RegistrarUsuario extends AppCompatActivity {
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, n);
+
+    }
+
+    public void ShowProgressDialog  (){
+
+        final ProgressDialog myPd_ring=ProgressDialog.show(RegistrarUsuario.this, "Please wait", "Loading please wait..", true);
+        myPd_ring.setCancelable(true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                try
+                {
+                    Thread.sleep(5000);
+                }catch(Exception e){}
+                myPd_ring.dismiss();
+            }
+        }).start();
 
     }
 

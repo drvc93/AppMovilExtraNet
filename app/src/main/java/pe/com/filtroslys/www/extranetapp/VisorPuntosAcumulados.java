@@ -23,7 +23,7 @@ public class VisorPuntosAcumulados extends AppCompatActivity {
          dni  =preferences.getString("DNI",null);
         setTitle("Reporte de puntos acumulados.");
         LoadVisor();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+       // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
 

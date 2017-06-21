@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,7 @@ public class Login extends AppCompatActivity {
     EditText txtUser ,  txtPass ;
     ActionBar actionBar;
     Button btnLogin ;
-    SharedPreferences preferences;;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class Login extends AppCompatActivity {
         txtTegistrar = (TextView)  findViewById(R.id.txtRegistrate);
         txtUser  =  (EditText) findViewById(R.id.txtUserName);
         txtPass = (EditText)findViewById(R.id.txtPass);
+        txtPass.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
         btnLogin  = (Button)findViewById(R.id.btnLogin);
         preferences = PreferenceManager.getDefaultSharedPreferences(Login.this);
 

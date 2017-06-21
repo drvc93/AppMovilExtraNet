@@ -1,12 +1,10 @@
 package pe.com.filtroslys.www.extranetapp;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,14 +12,12 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.SubMenu;
+
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -54,8 +50,8 @@ import Util.Constantes;
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    int ResultCode = 1 ;
-    String  nomb;
+    //int ResultCode = 1 ;
+   // String  nomb;
     String DniUserApp;
     SharedPreferences preferences;
     WebView webPortal;
@@ -184,16 +180,13 @@ public class MenuPrincipal extends AppCompatActivity
 
 
         }
-       // Toast.makeText( getApplicationContext(), String.valueOf(id),Toast.LENGTH_LONG).show();
-     /*   if (id == R.id.scanerqr) {
-              Intent  intent  = new Intent(MenuPrincipal.this , LectorQRActivity.class);
-              startActivity(intent);
 
-        } else if (id == R.id.nav_share) {
+        else if (id==999998){
 
-        } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(MenuPrincipal.this,Login.class);
+            startActivity(intent);
+        }
 
-        }*/
 
 
 
@@ -260,6 +253,9 @@ public class MenuPrincipal extends AppCompatActivity
 
             }
 
+            Menu mn = menu.addSubMenu(999999,999999,99,"Atajos");
+            menu.add(999999,999998,99,"SALIR").setIcon(SelectIconMenu(999998));
+
 
         }
 
@@ -288,6 +284,9 @@ public class MenuPrincipal extends AppCompatActivity
             case  15000:
                 icon = R.drawable.icn_catalogo24_2;
                 break;
+            case  999998 :
+                icon = R.drawable.icn_apagar24;
+
 
         }
         Log.i("Id Item Menu" , String.valueOf(NivelGN));
