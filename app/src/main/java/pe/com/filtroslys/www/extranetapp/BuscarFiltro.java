@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.samples.vision.barcodereader.BarcodeCapture;
+
 import java.util.concurrent.ExecutionException;
 
 import Task.VerificarCatalogoTask;
@@ -38,9 +40,13 @@ public class BuscarFiltro extends AppCompatActivity {
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent    = new Intent(BuscarFiltro.this , ReadScanQR.class);
+
+                Intent intent    = new Intent(BuscarFiltro.this , BarCodeVision.class);
                 intent.putExtra("Activ" , "Catalogo");
                 startActivity(intent);
+              /*Intent  intent  = new Intent(BuscarFiltro.this, BarCodeVision.class);
+                startActivity(intent);*/
+
             }
         });
 

@@ -157,32 +157,29 @@ public class MenuPrincipal extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id==11000){
+        if (id==11000){ //  registro qr
             Intent  intent  = new Intent(MenuPrincipal.this , LectorQRActivity.class);
             startActivity(intent);
-
         }
-
-        else if (id==12000){
-
+        else if (id==12000){ //puntos acumulados
             Intent  intent  = new Intent(MenuPrincipal.this , VisorPuntosAcumulados.class);
             startActivity(intent);
-
-
-
         }
-
-        else if (id==15000){
-
+        else if (id==13000){
+            Intent  intent  = new Intent(MenuPrincipal.this , PremiosReglas.class);
+            intent.putExtra("Pagina", "Premios");
+            startActivity(intent);
+        }
+        else if (id==14000){
+            Intent  intent  = new Intent(MenuPrincipal.this , PremiosReglas.class);
+            intent.putExtra("Pagina", "Reglas");
+            startActivity(intent);
+        }
+        else if (id==15000){// catalago filtros
             Intent  intent  = new Intent(MenuPrincipal.this , BuscarFiltro.class);
             startActivity(intent);
-
-
-
         }
-
-        else if (id==999998){
-
+        else if (id==999998){ // salir
             Intent intent = new Intent(MenuPrincipal.this,Login.class);
             startActivity(intent);
         }
@@ -321,7 +318,7 @@ public class MenuPrincipal extends AppCompatActivity
     }
 
     public  void  LoadPortal (){
-        webPortal.loadUrl(Constantes.UrlWS + "/" + Constantes.PortalWebPage);
+        webPortal.loadUrl(Constantes.UrlWS + "/" + Constantes.PortalWebPage+"?dni="+DniUserApp);
         webPortal.getSettings().setJavaScriptEnabled(true);
         webPortal.getSettings().setSaveFormData(true);
         webPortal.getSettings().setBuiltInZoomControls(true);

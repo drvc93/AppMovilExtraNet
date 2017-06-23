@@ -39,8 +39,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_style_silver"
                 android:ems="10"
-                android:inputType="textCapCharacters|textPersonName"
-                android:text="--" />
+                android:hint="---"
+                android:inputType="textCapCharacters|textPersonName" />
 
             <Button
                 android:id="@+id/btnEscanFiltro"

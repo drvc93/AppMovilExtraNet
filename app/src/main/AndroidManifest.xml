@@ -13,8 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icn_logo48round"
         android:supportsRtl="true"
-        android:name="pe.com.filtroslys.www.extranetapp.MyApplication"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity
             android:name=".MenuPrincipal"
@@ -35,7 +34,9 @@
         <activity android:name=".RegistroCodQr" />
         <activity android:name=".BuscarFiltro" />
         <activity android:name=".VisorCatalago" />
-        <activity android:name=".VisorPuntosAcumulados"></activity>
+        <activity android:name=".VisorPuntosAcumulados" />
+        <activity android:name=".BarCodeVision" />
+        <activity android:name=".PremiosReglas"></activity>
     </application>
 
 </manifest>

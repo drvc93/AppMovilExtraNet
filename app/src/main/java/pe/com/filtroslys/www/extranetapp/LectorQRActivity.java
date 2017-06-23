@@ -33,7 +33,7 @@ public class LectorQRActivity extends AppCompatActivity {
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent  intent    = new Intent(LectorQRActivity.this , ReadScanQR.class);
+                Intent  intent    = new Intent(LectorQRActivity.this , BarCodeVision.class);
                 intent.putExtra("Activ" , "Escaner");
                 startActivity(intent);
             }
