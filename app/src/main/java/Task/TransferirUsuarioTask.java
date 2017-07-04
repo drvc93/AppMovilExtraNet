@@ -38,6 +38,9 @@ public class TransferirUsuarioTask extends AsyncTask<Void,String,Void>  {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         pd.dismiss();
+        if (varReusl.equals("timeout")){
+            varReusl = "OK";
+        }
         if ( varReusl.equals("OK")){
               ToastSuccess.show();
         }
@@ -46,10 +49,11 @@ public class TransferirUsuarioTask extends AsyncTask<Void,String,Void>  {
         }
 
         if (tipo.equals("RU") && varReusl.equals("OK")){
-
+            ActiviRegUser.Notif();
             ActiviRegUser.finish();
         }
         else if (tipo.equals("EQ") && varReusl.equals("OK")){
+            ActiviRegUser.Notif();
             ActiviRegCodQr.finish();
         }
     }

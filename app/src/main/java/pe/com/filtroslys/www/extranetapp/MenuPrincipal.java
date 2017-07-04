@@ -1,6 +1,7 @@
 package pe.com.filtroslys.www.extranetapp;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -56,6 +57,7 @@ public class MenuPrincipal extends AppCompatActivity
     SharedPreferences preferences;
     WebView webPortal;
     ImageView  imgProfile ;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +73,8 @@ public class MenuPrincipal extends AppCompatActivity
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         webPortal = (WebView) findViewById(R.id.webviewPortal);
-        LoadPortal();
-        //WebView mWebView=(WebView)findViewById(R.id.mWebView);
+       LoadPortal();
 
-       /* webPortal.loadUrl("http://www.google.com");
-        webPortal.getSettings().setJavaScriptEnabled(true);
-        webPortal.getSettings().setSaveFormData(true);
-        webPortal.getSettings().setBuiltInZoomControls(true);
-        webPortal.setWebViewClient(new WebViewClient()); */
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

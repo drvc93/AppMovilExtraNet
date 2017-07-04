@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -74,11 +73,14 @@ public class RegistrarUsuario extends AppCompatActivity {
         currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= Build.VERSION_CODES.JELLY_BEAN_MR2){
             ActionBar actionBar = getSupportActionBar();
-            actionBar = getSupportActionBar();
-            actionBar.setDisplayUseLogoEnabled(true);
-            actionBar.setDisplayShowCustomEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.hide();
+            //actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayUseLogoEnabled(true);
+                actionBar.setDisplayShowCustomEnabled(true);
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.hide();
+            }
+
 
         }
 
@@ -115,9 +117,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         try {
             asyncTask = verificarExisteUsuarioTask.execute(txtDni.getText().toString());
             sRes = asyncTask.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -138,7 +138,6 @@ public class RegistrarUsuario extends AppCompatActivity {
         empruc = txtRucEmp.getText().toString();
         empnom  = txtNomEmp.getText().toString();
         fechanacimiento  = txtFecha.getText().toString();
-        EditText ed  = null ;
 
         if (TextUtils.isEmpty(dni)){
 
@@ -153,47 +152,39 @@ public class RegistrarUsuario extends AppCompatActivity {
         else if (TextUtils.isEmpty(nombre)){
 
             msn = "Debe ingresar un nombre valido." ;
-            ed = txtNom;
         }
         else if (TextUtils.isEmpty(apellido)){
 
             msn = "Debe ingresar un apellido valido.";
-            ed = txtApellidos;
         }
 
         else if (TextUtils.isEmpty(correo)){
 
             msn = "Debe ingresar un correo valido.";
-            ed = txtCorreo;
         }
 
         else if (TextUtils.isEmpty(telefono)){
 
             msn = "Debe ingresar un telefono valido.";
-            ed  =   txtCelular;
         }
 
         else if (TextUtils.isEmpty(empruc)){
 
             msn = "Debe ingresar un RUC de empresa  valido.";
-            ed = txtRucEmp;
         }
 
         else if (TextUtils.isEmpty(empnom)){
 
             msn = "Debe ingresar un nombre de empresa  valido.";
-            ed = txtNomEmp;
         }
 
         else if (empruc.length()<11){
             msn = "El ruc de la empresa debe tener al menos 11 caracteres";
-            ed = txtRucEmp;
         }
 
         else if (TextUtils.isEmpty(fechanacimiento)){
 
             msn = "Debe ingresar una fecha de nacimiento  valida.";
-            ed = txtFecha;
         }
 
 
@@ -235,10 +226,8 @@ public class RegistrarUsuario extends AppCompatActivity {
 
         try {
             asyncTask =  insertUserBDTempTask.execute(dni , nombre , apellido ,fechanacimiento , correo , telefono , empruc , empnom);
-            resul  = (String) asyncTask.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+            resul  = asyncTask.get();
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 

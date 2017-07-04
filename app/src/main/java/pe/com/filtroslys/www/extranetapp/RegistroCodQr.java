@@ -8,11 +8,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,7 +20,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -55,11 +54,14 @@ public class RegistroCodQr extends AppCompatActivity {
         currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if (currentapiVersion >= Build.VERSION_CODES.JELLY_BEAN_MR2){
             ActionBar actionBar = getSupportActionBar();
-            actionBar = getSupportActionBar();
-            actionBar.setDisplayUseLogoEnabled(true);
-            actionBar.setDisplayShowCustomEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.hide();
+
+            if (actionBar != null) {
+                actionBar.setDisplayUseLogoEnabled(true);
+                actionBar.setDisplayShowCustomEnabled(true);
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.hide();
+            }
+
 
         }
         preferences = PreferenceManager.getDefaultSharedPreferences(RegistroCodQr.this);
@@ -112,10 +114,10 @@ public class RegistroCodQr extends AppCompatActivity {
         String correoref = txtMailRef.getText().toString();
         String celRef = txtCelularRef.getText().toString();
 
-        if (TextUtils.isEmpty(dniref) == true) {
+        if (TextUtils.isEmpty(dniref)) {
            sMsj = "Ingrese un DNI de referencia valido.";
         }
-        else  if (TextUtils.isEmpty(correoref) == true) {
+        else  if (TextUtils.isEmpty(correoref)) {
             sMsj = "Ingrese un correo valido.";
         }
 
@@ -123,12 +125,12 @@ public class RegistroCodQr extends AppCompatActivity {
             sMsj = "El DNI de referencia debe contener 8 digitos.";
         }
 
-        else if (TextUtils.isEmpty(celRef) == true) {
+        else if (TextUtils.isEmpty(celRef)) {
 
             sMsj= "Ingrese un  número de celalar valido";
         }
 
-        else if (isOnline()==false){
+        else if (!isOnline()){
 
             sMsj = "Debe estar conectado a una red wi-fi o red de datos para realizar esta operación.verifique por favor.";
         }
@@ -155,10 +157,8 @@ public class RegistroCodQr extends AppCompatActivity {
 
         try {
             asyncTaskQR = insertarCodQRBD.execute(DniUserApp, codFiltroQR,DniRef,TelefonoRef,CorreoRef);
-            result = (String) asyncTaskQR.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+            result = asyncTaskQR.get();
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -166,8 +166,8 @@ public class RegistroCodQr extends AppCompatActivity {
             CreateCustomToast("No se pudo registrar el codigo QR.",Constantes.icon_error,Constantes.layout_error);
         }
         else if (Integer.valueOf(result)>0) {
-            String resTrasnf = "";
-            AsyncTask<Void,String,Void> asyncTaskTransQR ;
+
+           // AsyncTask<Void,String,Void> asyncTaskTransQR ;
             TransferirUsuarioTask transferirUsuarioTask = new TransferirUsuarioTask();
             ProgressDialog progressDialog= new ProgressDialog(RegistroCodQr.this);
             progressDialog.setTitle("Registrando...");
@@ -185,7 +185,7 @@ public class RegistroCodQr extends AppCompatActivity {
 
 
             try {
-                asyncTaskTransQR = transferirUsuarioTask.execute();
+                 transferirUsuarioTask.execute();
                 //resTrasnf = preferences.getString("msjTrans",null);
             } catch (Exception e) {
                 e.printStackTrace();
